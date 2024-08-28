@@ -4,9 +4,9 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(InitialState()){
-    on<LogIn>((event, emit) async {
-      if (){} //читаем пользователя в локальных данных и возвращаем состояние нужное
-      else{}
-    });
+    // on<LogIn>((event, emit) async {
+    //   if (){} //читаем пользователя в локальных данных и возвращаем состояние нужное
+    //   else{}
+    // });
   }
 }
