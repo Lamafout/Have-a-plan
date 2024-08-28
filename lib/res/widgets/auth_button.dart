@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class AuthButton extends StatelessWidget {
@@ -12,14 +14,29 @@ class AuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      onPressed: _onPressed, 
-      child: Text(
-        text,
-        style: TextStyle(
-          color: _textColor,
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: color.withOpacity(0.7),
+            shadowColor: Colors.transparent,
+            padding: const EdgeInsets.symmetric(vertical: 13)
+          ),
+          onPressed: _onPressed, 
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+            child: Text(
+              text,
+              style: TextStyle(
+                color: _textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )
         ),
-      )
+      ),
     );
   }
 }

@@ -44,7 +44,11 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                AuthButton(color: Colors.blue, text: 'Touch me'),
+                AuthButton(color: Colors.black, text: 'Sign in'),
+                const SizedBox(height: 10,),
+                AuthButton(color: Colors.white, text: 'Sign in', textColor: Colors.blue[900],),
+                const SizedBox(height: 10),
+                TextButton(onPressed: (){}, child: const Text('skip this step', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black54)))
               ]
             ),
           )
