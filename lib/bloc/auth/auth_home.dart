@@ -8,5 +8,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     //   if (){} //читаем пользователя в локальных данных и возвращаем состояние нужное
     //   else{}
     // });
+
+    // on<Loading>((event, emit) {
+    //   // TODO ищем пользовательские данные и возвращаем их
+    //   try {
+    //     // поиск данных
+    //     emit(Loaded(loadedInfo: loadedInfo));
+    //   } catch (e) {
+    //     emit(Failure());
+    //   }
+    // });
   }
 }

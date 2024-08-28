@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:have_a_plan/app/main.dart';
 import 'package:have_a_plan/res/widgets/auth_button.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -44,11 +45,18 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                AuthButton(color: Colors.black, text: 'Sign in'),
+                AuthButton(color: Colors.black, text: 'Sign up'),
                 const SizedBox(height: 10,),
-                AuthButton(color: Colors.white, text: 'Sign in', textColor: Colors.blue[900],),
+                AuthButton(color: Colors.white, text: 'Sign in', textColor: Colors.black,),
                 const SizedBox(height: 10),
-                TextButton(onPressed: (){}, child: const Text('skip this step', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black54)))
+                TextButton(
+                  onPressed: (){
+                    // TODO после добавления локального хранилища надо будет создать нового пользователя в локалке
+                    // чтобы при переходе на Home мы зашли в приложение
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                  }, 
+                  child: const Text('skip this step', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black54))
+                )
               ]
             ),
           )

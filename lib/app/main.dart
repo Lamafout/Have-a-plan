@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'globals.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/screens/auth.dart';
-import 'package:have_a_plan/bloc/auth_home.dart';
+import 'package:have_a_plan/bloc/auth/auth_home.dart';
+part 'screens/app/home.dart';
  void main(){
   runApp(const App());
  }
@@ -19,17 +21,16 @@ import 'package:have_a_plan/bloc/auth_home.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
-  final AuthBloc _authBloc = AuthBloc();
   @override
   Widget build(BuildContext context) {
     return AuthScreen();
     // return BlocBuilder(
-    //   bloc: _authBloc,
+    //   bloc: authBloc,
     //   builder: (context, state) {
     //     if (state is LoggedOutState){
     //       return const AuthScreen();
     //     }
-    //     else return HomeScreen();
+    //     else return Scaffold();
     //   },
 
     // );
