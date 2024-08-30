@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:have_a_plan/app/main.dart';
 import 'package:have_a_plan/res/widgets/auth_button.dart';
+import '../classes/user.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
+
+  // TODO добавить функционал для создания локального пользователя
+  _createLocalUser() async{
+    var box = await Hive.openBox('user');
+    box.add(User.local(username: 'user'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +61,10 @@ class AuthScreen extends StatelessWidget {
                   onPressed: (){
                     // TODO после добавления локального хранилища надо будет создать нового пользователя в локалке
                     // чтобы при переходе на Home мы зашли в приложение
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        _createLocalUser();
+                        return Home();
+                      }));
                   }, 
                   child: const Text('skip this step', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black54))
                 )

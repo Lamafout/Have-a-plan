@@ -16,7 +16,7 @@ class AuthButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(30)),
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.5,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -26,7 +26,7 @@ class AuthButton extends StatelessWidget {
           ),
           onPressed: _onPressed, 
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+            filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
             child: Text(
               text,
               style: TextStyle(
