@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
         SliverAppBar(
           actions: [
             BlocBuilder(
-              bloc: authBloc,
+              bloc: BlocProvider.of<AuthBloc>(context),
               builder: (context, state) {
                 if (state is Loaded){
                   // return Text('${state.loadedInfo['count_of_goals']} goals'); TODO раскомментить, когда будет бд наконец-то

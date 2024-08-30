@@ -26,7 +26,7 @@ class AuthScreen extends StatelessWidget {
                 )
               ) 
           ),
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -59,9 +59,7 @@ class AuthScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: (){
-                    // TODO после добавления локального хранилища надо будет создать нового пользователя в локалке
-                    // чтобы при переходе на Home мы зашли в приложение
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                         _createLocalUser();
                         return Home();
                       }));
