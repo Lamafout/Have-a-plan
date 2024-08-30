@@ -7,11 +7,28 @@ import 'package:hive_flutter/hive_flutter.dart';
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
-  // TODO добавить функционал для создания локального пользователя
-  _createLocalUser() async{
+  _createLocalUser() async {
+  try {
+    print('Opening box...');
     var box = await Hive.openBox('user');
-    box.add(User.local(username: 'user'));
+    print('Box opened');
+    
+    box.put('currentUser', User.local(username: 'user'));
+    print('User saved');
+
+    User? user = box.get('currentUser');
+    print('User retrieved');
+
+    if (user != null) {
+      print('name of the user: ${user.name}');
+    } else {
+      print('user is null!');
+    }
+  } catch (e) {
+    print('Error: $e');
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +75,9 @@ class AuthScreen extends StatelessWidget {
                 AuthButton(color: Colors.white, text: 'Sign in', textColor: Colors.black,),
                 const SizedBox(height: 10),
                 TextButton(
-                  onPressed: (){
+                  onPressed: ()async{
+                    await _createLocalUser();
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                        _createLocalUser();
                         return Home();
                       }));
                   }, 

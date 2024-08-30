@@ -5,21 +5,36 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<DataLoadingBloc>(context).add(Loading());
+    print('LOADING EVENT: send is succsesful');
     return CustomScrollView(
       slivers:[
         SliverAppBar(
           actions: [
             BlocBuilder(
-              bloc: BlocProvider.of<AuthBloc>(context),
+              bloc: BlocProvider.of<DataLoadingBloc>(context),
               builder: (context, state) {
-                if (state is Loaded){
-                  // return Text('${state.loadedInfo['count_of_goals']} goals'); TODO раскомментить, когда будет бд наконец-то
-                  return Text('hola');
-                } else return Text('salam');
+                if (state is GettedFromLocal){
+                  return const Center(child: Text('Local session'),);
+                } else{
+                  return const Center(child: Text('Not logged in'),);
+                }
               },
-            )
+            ),
           ],
-        )
+        ),
+        SliverToBoxAdapter(
+          child: BlocBuilder(
+            bloc: BlocProvider.of<DataLoadingBloc>(context),
+            builder: (context, state) {
+              if (state is GettedFromLocal){
+                return const Center(child: Text('Local session'),);
+              } else{
+                return const Center(child: Text('Some session'),);
+              }
+            },
+          ),
+        ),
       ]
     );
   }

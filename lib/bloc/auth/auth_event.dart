@@ -3,4 +3,3 @@ class AuthEvent{}
 
 class LogIn extends AuthEvent{}
 class GetFromLocal extends AuthEvent{}
-class Loading extends AuthEvent{}
