@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/main.dart';
+import 'package:have_a_plan/bloc/auth/auth_home.dart';
 import 'package:have_a_plan/res/widgets/auth_button.dart';
-import '../classes/user.dart';
+import '../../../classes/user.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -77,9 +79,7 @@ class AuthScreen extends StatelessWidget {
                 TextButton(
                   onPressed: ()async{
                     await _createLocalUser();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                        return Home();
-                      }));
+                    BlocProvider.of<AuthBloc>(context).add(LogIn());
                   }, 
                   child: const Text('skip this step', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black54))
                 )

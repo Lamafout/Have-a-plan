@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:have_a_plan/app/classes/note.dart';
+import 'package:have_a_plan/app/screens/app/auth/welcome.dart';
 import 'package:have_a_plan/bloc/data_loading/data_loading_bloc.dart';
+import 'package:have_a_plan/bloc/welcome_text/welcome_text_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:have_a_plan/app/screens/auth.dart';
+import 'package:have_a_plan/app/screens/app/auth/auth.dart';
 import 'package:have_a_plan/bloc/auth/auth_home.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -30,6 +32,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => DataLoadingBloc()),
+        BlocProvider(create: (context) => WelcomeTextBloc()),
       ],
       //TODO сделать тему
       child: MaterialApp(
@@ -44,15 +47,18 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AuthBloc>(context).add(LogIn());
     return BlocBuilder(
       bloc: BlocProvider.of<AuthBloc>(context),
       builder: (context, state) {
-        if (state is LoggedOutState) {
+        if (state is InitialState){
+          print('initial');
+          return WelcomeScreen();
+        }else if (state is LoggedOutState) {
           return const AuthScreen();
         } else if (state is LoggedInState){
           return const HomeScreen();
         } else {
+          print('error');
           return Container(
             color: Colors.white,
             child: const Center(
