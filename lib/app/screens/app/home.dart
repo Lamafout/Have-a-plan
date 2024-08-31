@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
             BlocBuilder(
               bloc: BlocProvider.of<DataLoadingBloc>(context),
               builder: (context, state) {
-                if (state is GettedFromLocal){
+                if (state is GettedFromLocal || state is Failure){
                   return const Center(child: Text('Local session'),);
                 } else{
                   return const Center(child: Text('Not logged in'),);
@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           child: BlocBuilder(
             bloc: BlocProvider.of<DataLoadingBloc>(context),
             builder: (context, state) {
-              if (state is GettedFromLocal){
+              if (state is GettedFromLocal || state is Failure){
                 return const Center(child: Text('Local session'),);
               } else{
                 return const Center(child: Text('Some session'),);
