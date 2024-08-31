@@ -4,9 +4,15 @@ part of 'data_loading_bloc.dart';
 sealed class DataLoadingState {}
 
 final class DataLoadingInitial extends DataLoadingState {}
-class GettedFromLocal extends DataLoadingState{}
+class GettedFromLocal extends DataLoadingState{
+  GettedFromLocal({required this.user});
+  final User user;
+}
 class Loaded extends DataLoadingState{
   Loaded({required this.loadedInfo});
-  var loadedInfo = Map<String, String>;
+  var loadedInfo = <String, String>{};
 }
-class Failure extends DataLoadingState{}
+class Failure extends DataLoadingState{
+  Failure({required this.user});
+  final User user;
+}

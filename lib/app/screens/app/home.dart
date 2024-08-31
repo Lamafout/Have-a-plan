@@ -7,35 +7,38 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<DataLoadingBloc>(context).add(Loading());
     print('LOADING EVENT: send is succsesful');
-    return CustomScrollView(
-      slivers:[
-        SliverAppBar(
-          actions: [
-            BlocBuilder(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: CustomScrollView(
+        slivers:[
+          SliverAppBar(
+            actions: [
+              BlocBuilder(
+                bloc: BlocProvider.of<DataLoadingBloc>(context),
+                builder: (context, state) {
+                  if (state is GettedFromLocal || state is Failure){
+                    return const Center(child: Text('Local session'),);
+                  } else{
+                    return const Center(child: Text('Not logged in'),);
+                  }
+                },
+              ),
+            ],
+          ),
+          SliverToBoxAdapter(
+            child: BlocBuilder(
               bloc: BlocProvider.of<DataLoadingBloc>(context),
               builder: (context, state) {
                 if (state is GettedFromLocal || state is Failure){
                   return const Center(child: Text('Local session'),);
                 } else{
-                  return const Center(child: Text('Not logged in'),);
+                  return const Center(child: Text('Some session'),);
                 }
               },
             ),
-          ],
-        ),
-        SliverToBoxAdapter(
-          child: BlocBuilder(
-            bloc: BlocProvider.of<DataLoadingBloc>(context),
-            builder: (context, state) {
-              if (state is GettedFromLocal || state is Failure){
-                return const Center(child: Text('Local session'),);
-              } else{
-                return const Center(child: Text('Some session'),);
-              }
-            },
           ),
-        ),
-      ]
+        ]
+      ),
     );
   }
 }

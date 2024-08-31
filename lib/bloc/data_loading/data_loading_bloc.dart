@@ -14,16 +14,16 @@ class DataLoadingBloc extends Bloc<DataLoadingEvent, DataLoadingState> {
       if (user != null){
         if (user.isLocal){
           print('STATE: user is local');
-          emit(GettedFromLocal());
+          emit(GettedFromLocal(user: user));
         }
         else{
           print('STATE: user is not local');
           // TODO ищем пользовательские данные и возвращаем их
           try {
             // поиск данных
-            emit(Loaded(loadedInfo: Map<String,String>));
+            emit(Loaded(loadedInfo: const <String,String>{}));
           } catch (e) {
-            emit(Failure());
+            emit(Failure(user: user));
           }
         }
       }
