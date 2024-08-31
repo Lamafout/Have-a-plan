@@ -45,7 +45,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<AuthBloc>(context).add(LogIn());
-    print('LOGIN EVENT: send is succsesful');
     return BlocBuilder(
       bloc: BlocProvider.of<AuthBloc>(context),
       builder: (context, state) {
@@ -54,8 +53,11 @@ class Home extends StatelessWidget {
         } else if (state is LoggedInState){
           return const HomeScreen();
         } else {
-          return const Center(
-            child: Text('Error', style: TextStyle(color: Colors.red),),
+          return Container(
+            color: Colors.white,
+            child: const Center(
+              child: CircularProgressIndicator()
+            ),
           );
         }
       },
