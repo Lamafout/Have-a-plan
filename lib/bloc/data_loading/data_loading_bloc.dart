@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/classes/user.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';

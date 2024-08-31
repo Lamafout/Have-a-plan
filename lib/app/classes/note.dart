@@ -5,9 +5,11 @@ class Written{
 }
 
 class Note implements Written{
-  Note({required this.name, required this.type, this.text});
-  Note.unnamed({required this.type})
-    :  name = 'unnamed';
+  Note({required this.name, this.text})
+    : type = 1;
+  Note.unnamed()
+    :  name = 'unnamed',
+       type = 1;
   @override
   String name;
   @override
@@ -20,7 +22,8 @@ class Note implements Written{
 }
 
 class ToDoBlock implements Written{
-  ToDoBlock({required this.name, required this.type});
+  ToDoBlock({required this.name})
+    : type = 0;
   @override
   String name;
   @override

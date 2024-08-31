@@ -1,9 +1,8 @@
 part of 'data_loading_bloc.dart';
 
-@immutable
-sealed class DataLoadingState {}
+class DataLoadingState {}
 
-final class DataLoadingInitial extends DataLoadingState {}
+class DataLoadingInitial extends DataLoadingState {}
 class GettedFromLocal extends DataLoadingState{
   GettedFromLocal({required this.user});
   final User user;

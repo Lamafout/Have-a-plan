@@ -20,7 +20,7 @@ class UserAdapter extends TypeAdapter<User> {
       name: fields[0] as String,
       password: fields[1] as String,
       email: fields[2] as String,
-      plans: (fields[3] as List).cast<Object>(),
+      plans: (fields[3] as List).cast<Written>(),
       isLocal: fields[4] as bool,
     );
   }

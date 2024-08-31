@@ -1,3 +1,4 @@
+import 'package:have_a_plan/app/classes/note.dart';
 import 'package:hive/hive.dart';
 
 part 'user.g.dart';
@@ -14,7 +15,7 @@ class User {
   String email;
 
   @HiveField(3)
-  List<Object> plans;
+  List<Written> plans;
 
   @HiveField(4)
   bool isLocal;
@@ -45,11 +46,11 @@ class User {
         plans = [],
         isLocal = false;
 
-  void addPlan(Object plan) {
+  void addPlan(Written plan) {
     plans.add(plan);
   }
 
-  void addAllPlans(List<Object> plans) {
+  void addAllPlans(List<Written> plans) {
     this.plans.addAll(plans);
   }
 
