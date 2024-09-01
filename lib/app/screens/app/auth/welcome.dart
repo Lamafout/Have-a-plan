@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/main.dart';
 import 'package:have_a_plan/bloc/auth/auth_home.dart';
-import 'package:have_a_plan/bloc/data_loading/data_loading_bloc.dart';
 import 'package:have_a_plan/bloc/welcome_text/welcome_text_bloc.dart';
 
 class WelcomeScreen extends StatelessWidget {

@@ -80,6 +80,11 @@ class AuthScreen extends StatelessWidget {
                   onPressed: ()async{
                     await _createLocalUser();
                     BlocProvider.of<AuthBloc>(context).add(LogIn());
+                    // возвращаю Home в навигаторе
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => Home())
+                    );
+
                   }, 
                   child: const Text('skip this step', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black54))
                 )

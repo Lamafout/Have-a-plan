@@ -4,7 +4,6 @@ import 'package:have_a_plan/app/classes/note.dart';
 import 'package:have_a_plan/app/screens/app/auth/welcome.dart';
 import 'package:have_a_plan/bloc/data_loading/data_loading_bloc.dart';
 import 'package:have_a_plan/bloc/welcome_text/welcome_text_bloc.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/screens/app/auth/auth.dart';
 import 'package:have_a_plan/bloc/auth/auth_home.dart';
@@ -53,74 +52,33 @@ class Home extends StatelessWidget {
         if (state is InitialState){
           print('initial');
           return WelcomeScreen();
-        }else if (state is LoggedOutState) {WidgetsBinding.instance.addPostFrameCallback((_) {
+        } else{
+            WidgetsBinding.instance.addPostFrameCallback((_){
             // Проверяем, не инициирована ли уже навигация
-            if (ModalRoute.of(context)?.isCurrent == true) {
-              Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  transitionDuration: const Duration(milliseconds: 500),
-                  pageBuilder: (context, animation, secondaryAnimation) => const AuthScreen(),
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    var begin = const Offset(1.0, 0.0);
-                    var end = Offset.zero;
-                    var curve = Curves.easeInOut;
-                    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                    var offsetAnimation = animation.drive(tween);
-
-                    return SlideTransition(
-                      position: offsetAnimation,
-                      child: child,
-                    );
-                  },
-                ),
-              );
-            }
-          });
-
-          // Возвращаем пустой контейнер или любой другой временный виджет,
-          // чтобы избежать перерисовки WelcomeScreen
-          return WelcomeScreen();
-        } else if (state is LoggedInState){
-          // Инициация перехода на HomeScreen с анимацией
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            // Проверяем, не инициирована ли уже навигация
-            if (ModalRoute.of(context)?.isCurrent == true) {
-              Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  transitionDuration: const Duration(milliseconds: 500),
-                  pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    var begin = const Offset(1.0, 0.0);
-                    var end = Offset.zero;
-                    var curve = Curves.easeInOut;
-                    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                    var offsetAnimation = animation.drive(tween);
-
-                    return SlideTransition(
-                      position: offsetAnimation,
-                      child: child,
-                    );
-                  },
-                ),
-              );
-            }
-          });
-
-          // Возвращаем пустой контейнер или любой другой временный виджет,
-          // чтобы избежать перерисовки WelcomeScreen
-          return WelcomeScreen();
-        }  else {
-          print('error');
-          return Container(
-            color: Colors.white,
-            child: const Center(
-              child: CircularProgressIndicator()
-            ),
-          );
-        }
-      },
-    );
-  }
+              if (ModalRoute.of(context)?.isCurrent == true) {
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: const Duration(milliseconds: 500),
+                    pageBuilder: (context, animation, secondaryAnimation) => (state is LoggedInState) ? HomeScreen() : AuthScreen(),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      var begin = const Offset(1.0, 0.0);
+                      var end = Offset.zero;
+                      var curve = Curves.easeInOut;
+                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                      var offsetAnimation = animation.drive(tween);
+              
+                      return SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      );
+                    },
+                  ),
+                );
+              }
+            });
+            return WelcomeScreen();
+          }
+        });
+      }
 }
