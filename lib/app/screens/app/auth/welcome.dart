@@ -28,9 +28,11 @@ class WelcomeScreen extends StatelessWidget {
               BlocProvider.of<WelcomeTextBloc>(context).add(PrintEvent());
             } else if (state is Print){
               print('PRINTED $_index');
-              _changeLetter;
+              _changeLetter();
               _index++;
-              BlocProvider.of<WelcomeTextBloc>(context).add(PrintEvent());
+              Future.delayed(const Duration(milliseconds: 100), (){
+                BlocProvider.of<WelcomeTextBloc>(context).add(PrintEvent());
+              });
             } else if (state is StopPrint){
               Future((){BlocProvider.of<AuthBloc>(context).add(LogIn());})
               .then((value) {
