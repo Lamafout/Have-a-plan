@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:have_a_plan/app/classes/note.dart';
@@ -7,6 +9,8 @@ import 'package:have_a_plan/bloc/welcome_text/welcome_text_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/screens/app/auth/auth.dart';
 import 'package:have_a_plan/bloc/auth/auth_home.dart';
+import 'package:have_a_plan/res/widgets/search_bar.dart';
+import 'package:have_a_plan/res/widgets/todo_widget.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'classes/user.dart';

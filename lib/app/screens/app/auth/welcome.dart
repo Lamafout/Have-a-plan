@@ -17,9 +17,9 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
         child: BlocBuilder(
           bloc: BlocProvider.of<WelcomeTextBloc>(context),
           builder: (context, state){
@@ -42,7 +42,9 @@ class WelcomeScreen extends StatelessWidget {
             return Text(
                 _tempText.join(''),
                 style: const TextStyle(
-                  color: Colors.black
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 60,
                 ),
               );
           }
