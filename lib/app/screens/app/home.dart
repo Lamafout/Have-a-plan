@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.person,
                   size: 30,
                 ),
@@ -62,11 +62,18 @@ class HomeScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Column(
               children: 
-              [],
+              [ToDoWidget(todo: ToDoElement(label: 'some label', isCompleted: false))],
             ),
           ),
         ],
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home_sharp)
+      //     )
+      //   ],
+      // ),
     );
   }
 }

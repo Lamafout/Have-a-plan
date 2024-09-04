@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:have_a_plan/app/classes/note.dart';
 import 'package:have_a_plan/app/screens/app/auth/welcome.dart';
 import 'package:have_a_plan/bloc/data_loading/data_loading_bloc.dart';
+import 'package:have_a_plan/bloc/todo_element/todo_element_bloc.dart';
 import 'package:have_a_plan/bloc/welcome_text/welcome_text_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/screens/app/auth/auth.dart';
@@ -36,9 +37,34 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => DataLoadingBloc()),
         BlocProvider(create: (context) => WelcomeTextBloc()),
+        BlocProvider(create: (context) => TodoElementBloc()),
       ],
       //TODO сделать тему
       child: MaterialApp(
+        theme: ThemeData(
+          textTheme: TextTheme(
+            headlineMedium: TextStyle(
+              color: Colors.indigo[900],
+            )
+          ),
+          primaryColor: Colors.indigo.withOpacity(0.3),
+          buttonTheme: ButtonThemeData(
+            colorScheme: ColorScheme(
+              onPrimary: Colors.indigo[900] as Color,
+              onSecondary: Colors.indigo[300] as Color,
+              onError: Colors.red,
+              onSurface: Colors.indigo[900] as Color,
+              brightness: Brightness.light,
+              primary: Colors.indigo[900] as Color,
+              secondary: Colors.indigo[300] as Color,
+              error: Colors.red,
+              surface: Colors.indigo[900] as Color,
+
+            ),
+            buttonColor: Colors.indigo[900],
+            highlightColor: Colors.indigo[300],
+          )
+        ),
         home: Home(),
       ),
     );
@@ -64,7 +90,7 @@ class Home extends StatelessWidget {
                   context,
                   PageRouteBuilder(
                     transitionDuration: const Duration(milliseconds: 500),
-                    pageBuilder: (context, animation, secondaryAnimation) => (state is LoggedInState) ? HomeScreen() : AuthScreen(),
+                    pageBuilder: (context, animation, secondaryAnimation) => (state is LoggedInState) ? HomeScreen() : const AuthScreen(),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                       var begin = const Offset(1.0, 0.0);
                       var end = Offset.zero;

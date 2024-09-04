@@ -8,6 +8,7 @@ class WelcomeTextBloc extends Bloc<WelcomeTextEvent, WelcomeTextState> {
     on<PrintEvent>((event, emit) {
       if (_counter != 'welcome'.length){
         _counter++;
+        print('COUNTER IN BLOC: $_counter');
         emit(Print());
       }
       else{
