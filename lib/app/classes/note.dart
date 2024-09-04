@@ -37,7 +37,7 @@ class ToDoBlock implements Written{
     todoList.addAll(todos);
   }
 }
-
+//TODO гений на Амале решил не делать индексы, поэтому их надо добавить и сделать заново user.g.dart
 class ToDoElement{
   ToDoElement({required this.label, required this.isCompleted});
   ToDoElement.create({required this.label}) : isCompleted = false;

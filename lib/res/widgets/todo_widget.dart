@@ -7,54 +7,74 @@ class ToDoWidget extends StatelessWidget {
   const ToDoWidget({required this.todo});
   final ToDoElement todo;
 
-  _onPressed(BuildContext context){
-    BlocProvider.of<TodoElementBloc>(context).add(ToDoElementToggled(todo: todo));
+  _onPressed(BuildContext context) {
+    BlocProvider.of<TodoElementBloc>(context)
+        .add(ToDoElementToggled(todo: todo));
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.7,
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              child: BlocBuilder<TodoElementBloc, TodoElementState>(
+                  builder: (context, state) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    // border: Border.all(color: Theme.of(context).buttonTheme.colorScheme?.secondary as Color, width: 3),
+                  ),
+                  child: IconButton(
+                      icon: todo.isCompleted
+                          ? Icon(Icons.check,
+                              size: 32,
+                              color: Theme.of(context)
+                                  .buttonTheme
+                                  .colorScheme
+                                  ?.primary)
+                          : const Icon(null),
+                      onPressed: () {
+                        _onPressed(context);
+                      }),
+                );
+              }),
             ),
-            child: Text(
-              todo.label,
-              style: TextStyle(
-                color: Theme.of(context).textTheme.headlineMedium?.color,
+            const SizedBox(
+              width: 5,
+            ),
+            Expanded(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
+                child: BlocBuilder(
+                  bloc: BlocProvider.of<TodoElementBloc>(context),
+                  builder: (context, state) {
+                    return Text(
+                      todo.label,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: todo.isCompleted
+                        ? Theme.of(context).textTheme.headlineSmall?.color
+                        : Theme.of(context).textTheme.headlineMedium?.color,
+                        decoration: todo.isCompleted
+                        ? TextDecoration.lineThrough
+                        : null,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-          BlocBuilder<TodoElementBloc, TodoElementState>(
-            builder: (context, state) {
-
-              return Container(
-                //TODO доделать дезигн
-                decoration: BoxDecoration(
-                  color: todo.isCompleted
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).buttonTheme.colorScheme?.primary,
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                  border: todo.isCompleted ? null : Border.all(color: Theme.of(context).buttonTheme.colorScheme?.secondary as Color, width: 5),
-                ),
-                child: IconButton(
-                  icon: todo.isCompleted 
-                    ? Icon(Icons.close_rounded, size: 30, color: Theme.of(context).buttonTheme.colorScheme?.primary)
-                    : const Icon(null),
-                  onPressed: () {
-                    _onPressed(context);
-                  }
-                ),
-              );
-            }
-          )
-        ],
-      )
-    );
+          ],
+        ));
   }
 }

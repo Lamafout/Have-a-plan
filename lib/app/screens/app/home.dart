@@ -3,7 +3,7 @@ part of '../../main.dart';
 class HomeScreen extends StatelessWidget {
 
 //TODO написать метод наполнения
-  List<ToDoWidget> listOfTodos = [];
+  final List<ToDoWidget> listOfTodos = [];
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,8 @@ class HomeScreen extends StatelessWidget {
                     });
                     return  Text(
                       'You have $sumOfPlans plans',
-                      style: const TextStyle(
-                        color: Colors.black,
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.headlineMedium?.color as Color,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
@@ -45,12 +45,27 @@ class HomeScreen extends StatelessWidget {
                   }
                 },
               ),
-              IconButton(
-                icon: const Icon(
-                  Icons.person,
-                  size: 30,
-                ),
-                onPressed: (){},
+              Row(
+                children: [
+                  // TODO сделать логику для синхронизации
+                  IconButton(
+                    icon: Icon(
+                      Icons.cloud_sync_rounded,
+                      size: 30,
+                      color: Theme.of(context).buttonTheme.colorScheme?.primary,
+                    ),
+                    onPressed: (){},
+                  ),
+                  //TODO сделать логику для просмотра профиля
+                  IconButton(
+                    icon: Icon(
+                      Icons.person,
+                      size: 30,
+                      color: Theme.of(context).buttonTheme.colorScheme?.primary,
+                    ),
+                    onPressed: (){},
+                  ),
+                ],
               ),
               ],
             ),

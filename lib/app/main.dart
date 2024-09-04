@@ -39,10 +39,12 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => WelcomeTextBloc()),
         BlocProvider(create: (context) => TodoElementBloc()),
       ],
-      //TODO сделать тему
       child: MaterialApp(
         theme: ThemeData(
           textTheme: TextTheme(
+            headlineSmall: TextStyle(
+              color: Colors.indigo[500]
+            ),
             headlineMedium: TextStyle(
               color: Colors.indigo[900],
             )
