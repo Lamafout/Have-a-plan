@@ -21,12 +21,12 @@ class NewNotePage extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.8,
           child: Column(
             children: [
-              const Text('Title'),
+              const Text('New written'),
               const SizedBox(height:10),
               TextField(
                 controller: _titleController,
                 decoration: const InputDecoration(
-                  hintText: 'имя новой записи'
+                  hintText: 'title of new written'
                 ),
               ),
               const SizedBox(height:10),

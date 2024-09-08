@@ -7,7 +7,7 @@ class MySearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 360,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -21,7 +21,7 @@ class MySearchBar extends StatelessWidget {
                 color: Colors.indigo.withOpacity(0.3),
               ),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 15),
                 child: TextField(
                   
                   cursorColor: Colors.black,
@@ -45,13 +45,14 @@ class MySearchBar extends StatelessWidget {
             child: Container(
               color: Colors.indigo.withOpacity(0.3),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                 child: IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.search,
-                    color: Colors.black,
+                    color: Theme.of(context).buttonTheme.colorScheme?.onPrimary,
                     size: 30,
                   ),
+                  //TODO добавить поисковой функционал
                   onPressed: (){},
                 ),
               ),
