@@ -1,21 +1,16 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:have_a_plan/app/classes/note.dart';
-import 'package:have_a_plan/app/screens/app/auth/welcome.dart';
+import 'package:have_a_plan/app/screens/app/home.dart';
+import 'package:have_a_plan/app/screens/auth/welcome.dart';
 import 'package:have_a_plan/bloc/data_loading/data_loading_bloc.dart';
+import 'package:have_a_plan/bloc/switch_page/switch_page_bloc.dart';
 import 'package:have_a_plan/bloc/todo_element/todo_element_bloc.dart';
 import 'package:have_a_plan/bloc/welcome_text/welcome_text_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:have_a_plan/app/screens/app/auth/auth.dart';
+import 'package:have_a_plan/app/screens/auth/auth.dart';
 import 'package:have_a_plan/bloc/auth/auth_home.dart';
-import 'package:have_a_plan/res/widgets/search_bar.dart';
-import 'package:have_a_plan/res/widgets/todo_widget.dart';
-import 'package:hive/hive.dart';
+import 'package:have_a_plan/bloc/written_controller/written_controller_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'classes/user.dart';
-part 'screens/app/home.dart';
 
 void main() async {
   // это нужно для работы с Hive
@@ -38,6 +33,8 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => DataLoadingBloc()),
         BlocProvider(create: (context) => WelcomeTextBloc()),
         BlocProvider(create: (context) => TodoElementBloc()),
+        BlocProvider(create: (context) => WrittenControllerBloc()),
+        BlocProvider(create: (context) => SwitchPageBloc()),
       ],
       child: MaterialApp(
         theme: ThemeData(

@@ -17,18 +17,20 @@ class WrittenAdapter extends TypeAdapter<Written> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Written(
-      name: fields[0] as String,
-      type: fields[1] as int,
-    );
+      name: fields[1] as String,
+      type: fields[2] as int,
+    )..index = fields[0] as int?;
   }
 
   @override
   void write(BinaryWriter writer, Written obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.index)
       ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
       ..write(obj.type);
   }
 
@@ -54,20 +56,24 @@ class NoteAdapter extends TypeAdapter<Note> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Note(
-      name: fields[0] as String,
-      text: fields[2] as String?,
-    )..type = fields[1] as int;
+      name: fields[1] as String,
+      text: fields[3] as String?,
+    )
+      ..index = fields[0] as int?
+      ..type = fields[2] as int;
   }
 
   @override
   void write(BinaryWriter writer, Note obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.index)
       ..writeByte(1)
-      ..write(obj.type)
+      ..write(obj.name)
       ..writeByte(2)
+      ..write(obj.type)
+      ..writeByte(3)
       ..write(obj.text);
   }
 
@@ -93,19 +99,23 @@ class ToDoBlockAdapter extends TypeAdapter<ToDoBlock> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ToDoBlock(
-      name: fields[0] as String,
-    )..type = fields[1] as int;
+      name: fields[1] as String,
+    )
+      ..index = fields[0] as int?
+      ..type = fields[2] as int;
   }
 
   @override
   void write(BinaryWriter writer, ToDoBlock obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.index)
       ..writeByte(1)
-      ..write(obj.type)
+      ..write(obj.name)
       ..writeByte(2)
+      ..write(obj.type)
+      ..writeByte(3)
       ..write(obj.todoList);
   }
 
@@ -133,19 +143,22 @@ class ToDoElementAdapter extends TypeAdapter<ToDoElement> {
     return ToDoElement(
       label: fields[1] as String,
       isCompleted: fields[2] as bool,
+      parrentId: fields[3] as int,
     )..id = fields[0] as int?;
   }
 
   @override
   void write(BinaryWriter writer, ToDoElement obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.label)
       ..writeByte(2)
-      ..write(obj.isCompleted);
+      ..write(obj.isCompleted)
+      ..writeByte(3)
+      ..write(obj.parrentId);
   }
 
   @override

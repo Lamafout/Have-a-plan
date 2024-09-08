@@ -47,6 +47,7 @@ class User {
         isLocal = false;
 
   void addPlan(Written plan) {
+    plan.index = plans.length;
     plans.add(plan);
   }
 

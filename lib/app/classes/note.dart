@@ -6,8 +6,10 @@ part 'note.g.dart';
 class Written{
   Written({required this.name, required this.type});
   @HiveField(0)
-  String name;
+  int? index;
   @HiveField(1)
+  String name;
+  @HiveField(2)
   int type;
 }
 @HiveType(typeId: 2)
@@ -19,11 +21,14 @@ class Note implements Written{
        type = 1;
   @HiveField(0)
   @override
-  String name;
+  int? index;
   @HiveField(1)
   @override
-  int type;
+  String name;
   @HiveField(2)
+  @override
+  int type;
+  @HiveField(3)
   String? text;
 
   saveText(String txt){
@@ -36,11 +41,14 @@ class ToDoBlock implements Written{
     : type = 0;
   @HiveField(0)
   @override
-  String name;
+  int? index;
   @HiveField(1)
   @override
-  int type;
+  String name;
   @HiveField(2)
+  @override
+  int type;
+  @HiveField(3)
   final todoList = <ToDoElement>[];
 
   addTodo(ToDoElement todo){
@@ -53,12 +61,14 @@ class ToDoBlock implements Written{
 }
 @HiveType(typeId: 4)
 class ToDoElement{
-  ToDoElement({required this.label, required this.isCompleted});
-  ToDoElement.create({required this.label}) : isCompleted = false;
+  ToDoElement({required this.label, required this.isCompleted, required this.parrentId});
+  ToDoElement.create({required this.label, required this.parrentId}) : isCompleted = false;
   @HiveField(0)
   int? id;
   @HiveField(1)
   String label;
   @HiveField(2)
   bool isCompleted;
+  @HiveField(3)
+  int parrentId;
 }

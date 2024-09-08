@@ -5,7 +5,7 @@ import 'package:have_a_plan/bloc/auth/auth_home.dart';
 import 'package:have_a_plan/bloc/welcome_text/welcome_text_bloc.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  WelcomeScreen() : _text = 'welcome'.split(''), _tempText = [];
+  WelcomeScreen({super.key}) : _text = 'welcome'.split(''), _tempText = [];
   final List<String> _tempText;
   final List<String> _text;
 

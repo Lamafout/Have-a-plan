@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/main.dart';
 import 'package:have_a_plan/bloc/auth/auth_home.dart';
 import 'package:have_a_plan/res/widgets/auth_button.dart';
-import '../../../classes/user.dart';
+import '../../classes/user.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class AuthScreen extends StatelessWidget {

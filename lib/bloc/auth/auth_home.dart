@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
-//TODO срочно разбить действия по разным блокам
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(InitialState()){
