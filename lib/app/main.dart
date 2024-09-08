@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:have_a_plan/app/classes/note.dart';
 import 'package:have_a_plan/app/screens/app/home.dart';
 import 'package:have_a_plan/app/screens/auth/welcome.dart';
 import 'package:have_a_plan/bloc/data_loading/data_loading_bloc.dart';
@@ -18,6 +19,10 @@ void main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(WrittenAdapter());
+  Hive.registerAdapter(NoteAdapter());
+  Hive.registerAdapter(ToDoBlockAdapter());
+  Hive.registerAdapter(ToDoElementAdapter());
 
   runApp(const App());
 }

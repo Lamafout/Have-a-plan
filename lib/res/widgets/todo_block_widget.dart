@@ -9,13 +9,17 @@ class ToDoBlockWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
+        border: Border.all(
+          color: Theme.of(context).primaryColor
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Text('test'),
           //TODO протестить
           ...todoBlock.todoList.map((elem)=>ToDoWidget(todo: elem))
         ],

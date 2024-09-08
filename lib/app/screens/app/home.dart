@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/classes/note.dart';
+import 'package:have_a_plan/app/classes/user.dart';
 import 'package:have_a_plan/bloc/data_loading/data_loading_bloc.dart';
 import 'package:have_a_plan/bloc/switch_page/switch_page_bloc.dart';
 import 'package:have_a_plan/bloc/written_controller/written_controller_bloc.dart';
 import 'package:have_a_plan/res/widgets/search_bar.dart';
+import 'package:have_a_plan/res/widgets/todo_block_widget.dart';
 part 'new_note_page.dart';
+part 'home_page.dart';
 
 class HomeScreen extends StatelessWidget {
-//TODO написать метод наполнения
   int _currentNavidationIndex = 1;
-  List<Widget> pages = [
-    NewNotePage(),
-    Column(),
-    Column(),
-  ];
+  List<Written> _plans = [];
+  List<Widget> pages = const [Column(), Column(), Column()];
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +36,12 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, state) {
                     if (state is GettedFromLocal) {
                       int sumOfPlans = 0;
+                      _plans = state.user.plans;
+                      pages = [
+                        NewNotePage(),
+                        HomePage(plans: _plans),
+                        const Column(),
+                      ];
                       var listOfBlocks =
                           state.user.plans.whereType<ToDoBlock>();
                       listOfBlocks.forEach((elem) {
