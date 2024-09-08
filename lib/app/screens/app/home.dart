@@ -13,7 +13,8 @@ part 'home_page.dart';
 class HomeScreen extends StatelessWidget {
   int _currentNavidationIndex = 1;
   List<Written> _plans = [];
-  List<Widget> pages = const [Column(), Column(), Column()];
+  // govnocode but i am happy
+  List<Widget> pages = [Column(), Center(child: CircularProgressIndicator(),), Column()];
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,7 @@ class HomeScreen extends StatelessWidget {
                     if (state is GettedFromLocal) {
                       int sumOfPlans = 0;
                       _plans = state.user.plans;
+                      BlocProvider.of<SwitchPageBloc>(context).add(SwitchPage(index: _currentNavidationIndex));
                       pages = [
                         NewNotePage(),
                         HomePage(plans: _plans),
