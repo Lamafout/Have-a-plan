@@ -4,4 +4,5 @@ class TodoElementState {}
 
 class TodoElementInitial extends TodoElementState {}
 
-class Updated extends TodoElementState {}
+class Toggled extends TodoElementState {}
+class Created extends TodoElementState {}

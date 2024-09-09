@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/classes/note.dart';
+import 'package:have_a_plan/bloc/todo_element/todo_element_bloc.dart';
 import 'package:have_a_plan/res/widgets/todo_widget.dart';
 
 class ToDoBlockWidget extends StatelessWidget {
@@ -50,16 +52,24 @@ class ToDoBlockWidget extends StatelessWidget {
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
-                  //TODO сделать функционал добавления тудушки к блоку
-                  onPressed: (){},
+                  onPressed: (){
+                    var todo = ToDoElement.create(label: 'test', parrentId: todoBlock.index as int);
+                    BlocProvider.of<TodoElementBloc>(context).add(Create(todo: todo));
+                  },
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 10),
-                    child: const Icon(Icons.add)
+                    child: Icon(Icons.add, color: Theme.of(context).buttonTheme.colorScheme?.onPrimary,)
                   ),
                 ),
               ),
               const SizedBox(height: 10),
-              ...todoBlock.todoList.map((elem)=>ToDoWidget(todo: elem))
+              BlocBuilder(
+                bloc: BlocProvider.of<TodoElementBloc>(context),
+                builder: (context, state){
+                  return Column(children: [...todoBlock.todoList.map((elem)=>ToDoWidget(todo: elem))]);
+                }
+              ),
+              
           ],
         ),
       ),

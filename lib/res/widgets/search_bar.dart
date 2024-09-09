@@ -18,7 +18,7 @@ class MySearchBar extends StatelessWidget {
               width: 300,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Colors.indigo.withOpacity(0.3),
+                color: Theme.of(context).primaryColor.withOpacity(0.3),
               ),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 15),
@@ -43,7 +43,7 @@ class MySearchBar extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(30)),
             child: Container(
-              color: Colors.indigo.withOpacity(0.3),
+              color: Theme.of(context).primaryColor.withOpacity(0.3),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                 child: IconButton(

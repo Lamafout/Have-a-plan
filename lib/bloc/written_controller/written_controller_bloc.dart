@@ -13,7 +13,6 @@ class WrittenControllerBloc extends Bloc<WrittenControllerEvent, WrittenControll
       User user = box.get('currentUser');
       user.addPlan(event.todoBlock);
       box.put('currentUser', user);
-      print('CREATED NEW WRITTEN');
       emit(CreatedState());
     });
   }

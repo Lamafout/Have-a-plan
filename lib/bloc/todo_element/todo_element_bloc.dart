@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:have_a_plan/app/classes/note.dart';
+import 'package:have_a_plan/app/classes/user.dart';
 import 'package:hive/hive.dart';
 
 part 'todo_element_event.dart';
@@ -7,16 +8,30 @@ part 'todo_element_state.dart';
 
 class TodoElementBloc extends Bloc<TodoElementEvent, TodoElementState> {
   TodoElementBloc() : super(TodoElementInitial()) {
-    var box = Hive.box('user');
-    on<Update>((event, emit) {
+    on<Toggle>((event, emit) {
+      var box = Hive.box('user');
       // change flag
       event.todo.isCompleted = !event.todo.isCompleted;
       // update in local storage
-      var plans = box.get('currentUser');
-      var todoBlock = plans[event.todo.parrentId];
-      todoBlock[event.todo.id] = event.todo;
+      User user = box.get('currentUser');
+      var parrentTodo = user.plans[event.todo.parrentId] as ToDoBlock;
+      parrentTodo.todoList[event.todo.id as int] = event.todo;
+      user.plans[event.todo.parrentId] = parrentTodo;
+      // save into box
+      box.put('currentUser', user);
       // send state
-      emit(Updated());
+      emit(Toggled());
+    });
+    on<Create>((event, emit) async {
+      var box = Hive.box('user');
+      User user = box.get('currentUser');
+      var parrentTodo = user.plans[event.todo.parrentId] as ToDoBlock;
+      parrentTodo.addTodo(event.todo);
+      user.plans[event.todo.parrentId] = parrentTodo;
+      // save into box
+      await box.put('currentUser', user);
+      // send state
+      emit(Created());
     });
   }
 }

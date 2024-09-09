@@ -17,9 +17,10 @@ class WrittenAdapter extends TypeAdapter<Written> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Written(
+      index: fields[0] as int?,
       name: fields[1] as String,
       type: fields[2] as int,
-    )..index = fields[0] as int?;
+    );
   }
 
   @override
@@ -56,11 +57,10 @@ class NoteAdapter extends TypeAdapter<Note> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Note(
+      index: fields[0] as int?,
       name: fields[1] as String,
       text: fields[3] as String?,
-    )
-      ..index = fields[0] as int?
-      ..type = fields[2] as int;
+    )..type = fields[2] as int;
   }
 
   @override
@@ -99,10 +99,11 @@ class ToDoBlockAdapter extends TypeAdapter<ToDoBlock> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ToDoBlock(
+      index: fields[0] as int?,
       name: fields[1] as String,
-    )
-      ..index = fields[0] as int?
-      ..type = fields[2] as int;
+      todoList: (fields[3] as List).cast<ToDoElement>(),
+      type: fields[2] as int,
+    );
   }
 
   @override
@@ -141,10 +142,11 @@ class ToDoElementAdapter extends TypeAdapter<ToDoElement> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ToDoElement(
+      id: fields[0] as int?,
       label: fields[1] as String,
       isCompleted: fields[2] as bool,
       parrentId: fields[3] as int,
-    )..id = fields[0] as int?;
+    );
   }
 
   @override

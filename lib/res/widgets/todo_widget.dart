@@ -11,7 +11,7 @@ class ToDoWidget extends StatelessWidget {
 
   _onPressed(BuildContext context) {
     BlocProvider.of<TodoElementBloc>(context)
-        .add(Update(todo: todo));
+        .add(Toggle(todo: todo));
   }
 
   @override
@@ -60,7 +60,7 @@ class ToDoWidget extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).primaryColor.withOpacity(0.3),
                     ),
                     child: BlocBuilder(
                       bloc: BlocProvider.of<TodoElementBloc>(context),

@@ -7,7 +7,6 @@ class NewNotePage extends StatelessWidget {
 
   _onToDoPressed(BuildContext context) {
     var todoBlock = ToDoBlock(name: _titleController.text);
-    print('SEND: create new block');
     BlocProvider.of<WrittenControllerBloc>(context).add(CreateToDoBlockEvent(todoBlock: todoBlock));
   }
 

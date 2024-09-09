@@ -110,7 +110,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      //TODO сделать перелкючение экранов. в первую очередь на экран создания нового виджета
       bottomNavigationBar: 
       BlocBuilder<SwitchPageBloc, SwitchPageState>(
         builder: (context, state) {
@@ -118,7 +117,6 @@ class HomeScreen extends StatelessWidget {
           BottomNavigationBar(
             onTap: (index) {
               _currentNavidationIndex = index;
-              print('SEND SWITCH EVENT');
               BlocProvider.of<SwitchPageBloc>(context)
                   .add(SwitchPage(index: index));
             },
