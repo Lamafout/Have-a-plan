@@ -6,7 +6,7 @@ import 'package:have_a_plan/app/classes/note.dart';
 import 'package:have_a_plan/bloc/todo_element/todo_element_bloc.dart';
 
 class ToDoWidget extends StatelessWidget {
-  const ToDoWidget({required this.todo, super.key});
+  ToDoWidget({required this.todo, super.key});
   final ToDoElement todo;
 
   _onPressed(BuildContext context) {
@@ -54,19 +54,21 @@ class ToDoWidget extends StatelessWidget {
             Expanded(
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(30)),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.3),
-                    ),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor.withOpacity(0.3),
+                  ),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 15),
                     child: BlocBuilder(
                       bloc: BlocProvider.of<TodoElementBloc>(context),
                       builder: (context, state) {
-                        return Text(
-                          todo.label,
+                        return TextFormField(
+                          initialValue: todo.label,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -77,7 +79,31 @@ class ToDoWidget extends StatelessWidget {
                             ? TextDecoration.lineThrough
                             : null,
                           ),
+                          onChanged: (value) {
+                            todo.label = value;
+                          },
+                          onEditingComplete: (){
+                            BlocProvider.of<TodoElementBloc>(context).add(Update(todo: todo));
+                          },
+                          onTapOutside: (event) {
+                            BlocProvider.of<TodoElementBloc>(context).add(Update(todo: todo));
+                            FocusScope.of(context).unfocus();
+                          },
+                          
                         );
+                        // return Text(
+                        //   todo.label,
+                        //   style: TextStyle(
+                        //     fontWeight: FontWeight.bold,
+                        //     fontSize: 16,
+                        //     color: todo.isCompleted
+                        //     ? Theme.of(context).textTheme.headlineSmall?.color
+                        //     : Theme.of(context).textTheme.headlineMedium?.color,
+                        //     decoration: todo.isCompleted
+                        //     ? TextDecoration.lineThrough
+                        //     : null,
+                        //   ),
+                        // );
                       },
                     ),
                   ),

@@ -33,5 +33,17 @@ class TodoElementBloc extends Bloc<TodoElementEvent, TodoElementState> {
       // send state
       emit(Created());
     });
+    on<Update>((event, emit) {
+      print('VALUES: ${event.todo.label}');
+      var box = Hive.box('user');
+      User user = box.get('currentUser');
+      var parrentTodo = user.plans[event.todo.parrentId] as ToDoBlock;
+      parrentTodo.todoList[event.todo.id as int] = event.todo;
+      user.plans[event.todo.parrentId] = parrentTodo;
+      // save into box
+      box.put('currentUser', user);
+      // send state
+      emit(Updated());
+    });
   }
 }

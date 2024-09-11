@@ -23,7 +23,6 @@ class MySearchBar extends StatelessWidget {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 15),
                 child: TextField(
-                  
                   cursorColor: Colors.black,
                   controller: _controller,
                   style: const TextStyle(

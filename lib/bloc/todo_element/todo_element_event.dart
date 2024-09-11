@@ -9,3 +9,8 @@ class Create extends TodoElementEvent {
   Create({required this.todo});
   final ToDoElement todo;
 }
+class Update extends TodoElementEvent {
+  Update({required this.todo});
+  final ToDoElement todo;
+}
+class Delete extends TodoElementEvent {}

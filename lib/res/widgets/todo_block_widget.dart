@@ -53,7 +53,7 @@ class ToDoBlockWidget extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
                   onPressed: (){
-                    var todo = ToDoElement.create(label: 'test', parrentId: todoBlock.index as int);
+                    var todo = ToDoElement.create(label: '', parrentId: todoBlock.index as int);
                     BlocProvider.of<TodoElementBloc>(context).add(Create(todo: todo));
                   },
                   child: BackdropFilter(
